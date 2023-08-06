@@ -172,7 +172,7 @@ def start_checkin(username, password, url, chrome_path, chromedriver_path, debug
             print(f"post status code: {response.status_code}")
             print(f"post headers: {response.headers}")
             # print(f"post text: {response.text}")
-        print((f"post response.json: {response.json()}")
+        print(f"post response.json: {response.json()}")
 
     except Exception as e:
         print("Check in Failed.")
