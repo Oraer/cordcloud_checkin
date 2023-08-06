@@ -134,9 +134,9 @@ def start_checkin(username, password, url, chrome_path, chromedriver_path, debug
         if debug:
             print(f"get page url: f{driver.current_url}")
             print(f"page sources: f{driver.page_source}")
-        email_input = driver.find_element(by=By.ID, value="email")
+        email_input = driver.find_element(by=By.NAME, value="Email")
         email_input.send_keys(username)
-        password_input = driver.find_element(by=By.ID, value="passwd")
+        password_input = driver.find_element(by=By.NAME, value="Password")
         password_input.send_keys(password)
         driver.find_element(by=By.ID, value="login").click()
         if debug:
