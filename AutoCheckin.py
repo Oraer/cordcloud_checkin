@@ -8,7 +8,6 @@ import zipfile
 import requests
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
-import time
 
 def unzip(src, dest):
     if os.path.exists(src):
@@ -135,23 +134,18 @@ def start_checkin(username, password, url, chrome_path, chromedriver_path, debug
         if debug:
             print(f"get page url: f{driver.current_url}")
             print(f"page sources: f{driver.page_source}")
-        email_input = driver.find_element(by=By.NAME, value="Email")
+        email_input = driver.find_element(by=By.ID, value="email")
         email_input.send_keys(username)
-        password_input = driver.find_element(by=By.NAME, value="Password")
+        password_input = driver.find_element(by=By.ID, value="passwd")
         password_input.send_keys(password)
         driver.find_element(by=By.ID, value="login").click()
-
-        print("sleep 10s, waiting Login")
-        time.sleep(10)
-        print("#"*40 + "\nFirst Step Login Login Login\n" + "#"*40)
-
         if debug:
             print(f"get page url: f{driver.current_url}")
             print(f"page sources: f{driver.page_source}")
-        # text = driver.find_element(by=By.XPATH,
-        #                            value="/html/body/main/div[2]/section/div[2]/div[1]/div[1]/div/div[2]/p[2]").text
-        # print("Login success!")
-        # print(text)
+        text = driver.find_element(by=By.XPATH,
+                                   value="/html/body/main/div[2]/section/div[2]/div[1]/div[1]/div/div[2]/p[2]").text
+        print("Login success!")
+        print(text)
 
         cookies = driver.get_cookies()
         c = {}
@@ -171,11 +165,10 @@ def start_checkin(username, password, url, chrome_path, chromedriver_path, debug
             print(f"post url: {response.url}")
             print(f"post status code: {response.status_code}")
             print(f"post headers: {response.headers}")
-            # print(f"post text: {response.text}")
-        print(f"post response.json: {response.json()}")
+            print(f"post text: {response.text}")
+        print(response.json())
 
     except Exception as e:
-        print("Check in Failed.")
         print(e)
     finally:
         driver.quit()
