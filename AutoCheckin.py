@@ -139,11 +139,12 @@ def start_checkin(username, password, url, chrome_path, chromedriver_path, debug
         password_input = driver.find_element(by=By.NAME, value="Password")
         password_input.send_keys(password)
         driver.find_element(by=By.ID, value="login").click()
+        print("#"*40 + "\nFirst Step Login Login Login\n" + "#"*40)
         if debug:
             print(f"get page url: f{driver.current_url}")
             print(f"page sources: f{driver.page_source}")
-        text = driver.find_element(by=By.XPATH,
-                                   value="/html/body/main/div[2]/section/div[2]/div[1]/div[1]/div/div[2]/p[2]").text
+        text = driver.find_element(by=By.CSS_SELECTOR,
+                                   value="body > main > div.container > section > div:nth-child(2) > div.col-xx-12.col-sm-5 > div:nth-child(1) > div > div:nth-child(2) > p:nth-child(2)").text
         print("Login success!")
         print(text)
 
